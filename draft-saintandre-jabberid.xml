@@ -30,9 +30,9 @@
         <email>psaintan@cisco.com</email>
       </address>
     </author>
-    <date day="20" month="September" year="2013"/>
+    <date/>
     <abstract>
-      <t>This document defines a header field that enables the author of an email or netnews message to include a Jabber Identifier in the message header block for the purpose of associating the author with a particular Extensible Messaging and Presence Protocol (XMPP) address.</t>
+      <t>This document defines a header field that enables the author of an email or netnews message to include a Jabber ID in the message header block for the purpose of associating the author with a particular Extensible Messaging and Presence Protocol (XMPP) address.</t>
     </abstract>
   </front>
 
@@ -40,7 +40,8 @@
 
     <section title="Introduction" anchor='intro'>
       <t>The Extensible Messaging and Presence Protocol (XMPP), documented in <xref target='RFC6120'/>, is a streaming XML technology that enables any two entities on a network to exchange well-defined but extensible XML elements (called "XML stanzas") in close to real time.  Given XMPP's heritage in the Jabber open-source community, one of the primary uses for XMPP is instant messaging and presence as documented in <xref target='RFC6121'/>, and XMPP addresses are still referred to as Jabber IDs.</t>
-      <t>Because almost all human users of Jabber/XMPP instant messaging and presence systems also use email systems <xref target='RFC5322'/> and because many such users also use netnews systems <xref target='RFC5536'/>, it can be helpful for such users to specify their Jabber IDs in the messages they author.  The Jabber-ID header field provides a standard location for that information.  Members of the XMPP instant messaging and presence community have been experimenting with this usage for many years.  As a result, this document provides informational documentation regarding the syntax and implementation of the Jabber-ID header field, including the information necessary to register the Jabber-ID field in the Provisional Message Header Field Registry maintained by the IANA.</t>
+      <t>Because almost all human users of Jabber/XMPP instant messaging and presence systems also use email systems <xref target='RFC5322'/> and because many also use netnews systems <xref target='RFC5536'/>, it can be helpful for them to associate their Jabber IDs with the messages they author.  The Jabber-ID header field provides a standard location for that information.</t>
+      <t>Members of the XMPP instant messaging and presence community have been experimenting with the Jabber-ID header field for many years.  This document defines the syntax and usage of the Jabber-ID header field, including the information necessary to register the field in the Provisional Message Header Field Registry maintained by the IANA.</t>
     </section>
 
     <section title="Syntax" anchor="syntax">
@@ -50,13 +51,13 @@
    Jabber-ID = SP *WSP pathxmpp *WSP CRLF
         ]]></artwork>
       </figure>
-      <t>Although a native XMPP address can contain virtually any Unicode character <xref target='UNICODE'/>, the header of an email or netnews message is allowed to contain only printable ASCII characters (see Section 2 of <xref target='RFC5322'/>).  Therefore, any characters outside the ASCII range <xref target='RFC20'/> in an XMPP address needs to be converted to ASCII before inclusion in a Jabber-ID header field, in accordance with the rules specified in the XMPP URI specification <xref target='RFC5122'/>.  In addition, characters allowed in XMPP localparts and XMPP resourceparts but disallowed by the relevant URI rules need to be percent-encoded in accordance with the rules specified in the URI specification <xref target='RFC3986'/>.</t>
+      <t>Although a native XMPP address can contain virtually any Unicode character <xref target='UNICODE'/>, the header of an email or netnews message is allowed to contain only printable ASCII characters (see Section 2 of <xref target='RFC5322'/>).  Therefore, any characters outside the ASCII range <xref target='RFC20'/> in an XMPP address need to be converted to ASCII before inclusion in a Jabber-ID header field, in accordance with the rules defined in the XMPP URI specification <xref target='RFC5122'/>.  In addition, characters allowed in XMPP localparts and XMPP resourceparts but disallowed by the relevant URI rules need to be percent-encoded in accordance with the rules defined in the URI specification <xref target='RFC3986'/>.</t>
     </section>
 
-    <section title="Implementation Notes" anchor="impl">
+    <section title="Usage" anchor="usage">
 
       <section title="Inclusion" anchor="inclusion">
-        <t>The Jabber-ID header field is associated with the author of the message; see <xref target='RFC5322'/>.  If the "From:" header field of an email message contains more than one mailbox, it is best not to add the Jabber-ID header field to the message.  There ought to be no more than one instance of the Jabber-ID header field.</t>
+        <t>The Jabber-ID header field is associated with the author of the message; see <xref target='RFC5322'/>.  If the "From:" header field of an email message contains more than one mailbox, it is best not to add the Jabber-ID header field to the message.  There ought to be no more than one instance of the Jabber-ID header field in a given message.</t>
       </section>
 
       <section title="Generation" anchor="generation">
@@ -83,11 +84,11 @@
       </section>
 
       <section title="Processing" anchor="processing">
-        <t>Upon receiving an email or netnews message containing a Jabber-ID header field, a user agent that supports the field ought to process the field by converting any escaped characters to characters outside the ASCII range in accordance with the rules specified in <xref target='RFC5122'/>, thus yielding a Jabber Idenfitier that can be used for native communication on an XMPP network.</t>
+        <t>Upon receiving an email message or netnews message containing a Jabber-ID header field, a user agent that supports the field ought to process the field by converting any escaped characters to characters outside the ASCII range in accordance with the rules defined in <xref target='RFC5122'/>, thus yielding a Jabber ID that can be used for native communication on the XMPP network.</t>
       </section>
 
       <section title="Disposition" anchor="disposition">
-        <t>A user agent that has processed a Jabber-ID header field can provide appropriate interface elements if it has independent information linking the author of the email or netnews message with the specified Jabber Identifier (e.g., via a user-controlled address book or automated directory lookup).  Such interface elements might include an indicator of "presence" (i.e., that the author is online and available for communication via XMPP) if the user is subscribed to the presence of the author, and an element that enables the user to initiate a text chat with the author.</t>
+        <t>A user agent that has processed a Jabber-ID header field can provide appropriate interface elements if it has independent information linking the author of the email or netnews message with the specified Jabber ID (e.g., via a user-controlled address book or automated directory lookup).  Such interface elements might include an indicator of "presence" (i.e., that the author is online and available for communication via XMPP) if the user is subscribed to the presence of the author, and an element that enables the user to send an instant message or initiate a text chat session with the author.</t>
       </section>
 
     </section>
@@ -119,97 +120,6 @@
   <back>
 
     <references title="Normative References">
-
-<reference anchor='RFC5122'>
-<front>
-<title>Internationalized Resource Identifiers (IRIs) and Uniform Resource Identifiers (URIs) for the Extensible Messaging and Presence Protocol (XMPP)</title>
-<author initials='P.' surname='Saint-Andre' fullname='P. Saint-Andre'>
-<organization /></author>
-<date year='2008' month='February' />
-<abstract>
-<t>This document defines the use of Internationalized Resource Identifiers (IRIs) and Uniform Resource Identifiers (URIs) in identifying or interacting with entities that can communicate via the Extensible Messaging and Presence Protocol (XMPP). [STANDARDS-TRACK]</t></abstract></front>
-<seriesInfo name='RFC' value='5122' />
-<format type='TXT' octets='55566' target='http://www.rfc-editor.org/rfc/rfc5122.txt' />
-</reference>
-
-<reference anchor='RFC5234'>
-<front>
-<title>Augmented BNF for Syntax Specifications: ABNF</title>
-<author initials='D.' surname='Crocker' fullname='D. Crocker'>
-<organization /></author>
-<author initials='P.' surname='Overell' fullname='P. Overell'>
-<organization /></author>
-<date year='2008' month='January' />
-<abstract>
-<t>Internet technical specifications often need to define a formal syntax.  Over the years, a modified version of Backus-Naur Form (BNF), called Augmented BNF (ABNF), has been popular among many Internet specifications.  The current specification documents ABNF.  It balances compactness and simplicity with reasonable representational power.  The differences between standard BNF and ABNF involve naming rules, repetition, alternatives, order-independence, and value ranges.  This specification also supplies additional rule definitions and encoding for a core lexical analyzer of the type common to several Internet specifications. [STANDARDS-TRACK]</t></abstract></front>
-<seriesInfo name='STD' value='68' />
-<seriesInfo name='RFC' value='5234' />
-<format type='TXT' octets='26359' target='http://www.rfc-editor.org/rfc/rfc5234.txt' />
-</reference>
-
-<reference anchor='RFC5322'>
-<front>
-<title>Internet Message Format</title>
-<author initials='P.' surname='Resnick' fullname='Peter W. 
-Resnick' role='editor'>
-<organization>Qualcomm Incorporated</organization>
-<address>
-<postal>
-<street>5775 Morehouse Drive</street>
-<city>San Diego</city>
-<region>CA</region>
-<code>92121-1714</code>
-<country>US</country></postal>
-<phone>+1 858 651 4478</phone>
-<email>presnick@qualcomm.com</email>
-<uri>http://www.qualcomm.com/~presnick/</uri></address></author>
-<date year='2008' month='October' />
-<abstract>
-<t>This document specifies the Internet 
-Message Format (IMF), a syntax for text messages
-			that are sent between computer users, within 
-the framework of "electronic mail"
-			messages. This specification is a revision of 
-Request For Comments (RFC) 2822, which
-			itself superseded Request For Comments (RFC) 
-822, "Standard for the Format of ARPA
-			Internet Text Messages", updating it to 
-reflect current practice and incorporating
-			incremental changes that were specified in 
-other RFCs.</t></abstract></front>
-<seriesInfo name='RFC' value='5322' />
-<format type='TXT' octets='122322' target='http://www.rfc-editor.org/rfc/rfc5322.txt' />
-<format type='HTML' octets='213393' target='http://xml.resource.org/public/rfc/html/rfc5322.html' />
-<format type='XML' octets='174234' target='http://xml.resource.org/public/rfc/xml/rfc5322.xml' />
-</reference>
-
-<reference anchor='RFC6120'>
-<front>
-<title>Extensible Messaging and Presence Protocol (XMPP): Core</title>
-<author initials='P.' surname='Saint-Andre' fullname='P. Saint-Andre'>
-<organization /></author>
-<date year='2011' month='March' />
-<abstract>
-<t>The Extensible Messaging and Presence Protocol (XMPP) is an application profile of the Extensible Markup Language (XML) that enables the near-real-time exchange of structured yet extensible data between any two or more network entities.  This document defines XMPP's core protocol methods: setup and teardown of XML streams, channel encryption, authentication, error handling, and communication primitives for messaging, network availability ("presence"), and request-response interactions.  This document obsoletes RFC 3920. [STANDARDS-TRACK]</t></abstract></front>
-<seriesInfo name='RFC' value='6120' />
-<format type='TXT' octets='451942' target='http://www.rfc-editor.org/rfc/rfc6120.txt' />
-</reference>
-
-    </references>
-
-    <references title="Informative References">
-
-<reference anchor='RFC20'>
-<front>
-<title>ASCII format for network interchange</title>
-<author initials='V.' surname='Cerf' fullname='Vint Cerf'>
-<organization>University California Los Angeles (UCLA)</organization></author>
-<date year='1969' day='16' month='October' />
-<abstract>
-<t>For concreteness, we suggest the use of standard 7-bit ASCII embedded in an 8 bit byte whose high order bit is always 0.</t></abstract></front>
-<seriesInfo name='RFC' value='20' />
-<format type='TXT' octets='18504' target='http://www.rfc-editor.org/rfc/rfc20.txt' />
-</reference>
 
 <reference anchor='RFC3986'>
 <front>
@@ -296,6 +206,107 @@ specifications of each URI scheme.
 <format type='TXT' octets='111190' target='http://www.rfc-editor.org/rfc/rfc3987.txt' />
 </reference>
 
+<reference anchor='RFC5122'>
+<front>
+<title>Internationalized Resource Identifiers (IRIs) and Uniform Resource Identifiers (URIs) for the Extensible Messaging and Presence Protocol (XMPP)</title>
+<author initials='P.' surname='Saint-Andre' fullname='P. Saint-Andre'>
+<organization /></author>
+<date year='2008' month='February' />
+<abstract>
+<t>This document defines the use of Internationalized Resource Identifiers (IRIs) and Uniform Resource Identifiers (URIs) in identifying or interacting with entities that can communicate via the Extensible Messaging and Presence Protocol (XMPP). [STANDARDS-TRACK]</t></abstract></front>
+<seriesInfo name='RFC' value='5122' />
+<format type='TXT' octets='55566' target='http://www.rfc-editor.org/rfc/rfc5122.txt' />
+</reference>
+
+<reference anchor='RFC5234'>
+<front>
+<title>Augmented BNF for Syntax Specifications: ABNF</title>
+<author initials='D.' surname='Crocker' fullname='D. Crocker'>
+<organization /></author>
+<author initials='P.' surname='Overell' fullname='P. Overell'>
+<organization /></author>
+<date year='2008' month='January' />
+<abstract>
+<t>Internet technical specifications often need to define a formal syntax.  Over the years, a modified version of Backus-Naur Form (BNF), called Augmented BNF (ABNF), has been popular among many Internet specifications.  The current specification documents ABNF.  It balances compactness and simplicity with reasonable representational power.  The differences between standard BNF and ABNF involve naming rules, repetition, alternatives, order-independence, and value ranges.  This specification also supplies additional rule definitions and encoding for a core lexical analyzer of the type common to several Internet specifications. [STANDARDS-TRACK]</t></abstract></front>
+<seriesInfo name='STD' value='68' />
+<seriesInfo name='RFC' value='5234' />
+<format type='TXT' octets='26359' target='http://www.rfc-editor.org/rfc/rfc5234.txt' />
+</reference>
+
+<reference anchor='RFC5322'>
+<front>
+<title>Internet Message Format</title>
+<author initials='P.' surname='Resnick' fullname='Peter W. 
+Resnick' role='editor'>
+<organization>Qualcomm Incorporated</organization>
+<address>
+<postal>
+<street>5775 Morehouse Drive</street>
+<city>San Diego</city>
+<region>CA</region>
+<code>92121-1714</code>
+<country>US</country></postal>
+<phone>+1 858 651 4478</phone>
+<email>presnick@qualcomm.com</email>
+<uri>http://www.qualcomm.com/~presnick/</uri></address></author>
+<date year='2008' month='October' />
+<abstract>
+<t>This document specifies the Internet 
+Message Format (IMF), a syntax for text messages
+			that are sent between computer users, within 
+the framework of "electronic mail"
+			messages. This specification is a revision of 
+Request For Comments (RFC) 2822, which
+			itself superseded Request For Comments (RFC) 
+822, "Standard for the Format of ARPA
+			Internet Text Messages", updating it to 
+reflect current practice and incorporating
+			incremental changes that were specified in 
+other RFCs.</t></abstract></front>
+<seriesInfo name='RFC' value='5322' />
+<format type='TXT' octets='122322' target='http://www.rfc-editor.org/rfc/rfc5322.txt' />
+<format type='HTML' octets='213393' target='http://xml.resource.org/public/rfc/html/rfc5322.html' />
+<format type='XML' octets='174234' target='http://xml.resource.org/public/rfc/xml/rfc5322.xml' />
+</reference>
+
+<reference anchor='RFC6120'>
+<front>
+<title>Extensible Messaging and Presence Protocol (XMPP): Core</title>
+<author initials='P.' surname='Saint-Andre' fullname='P. Saint-Andre'>
+<organization /></author>
+<date year='2011' month='March' />
+<abstract>
+<t>The Extensible Messaging and Presence Protocol (XMPP) is an application profile of the Extensible Markup Language (XML) that enables the near-real-time exchange of structured yet extensible data between any two or more network entities.  This document defines XMPP's core protocol methods: setup and teardown of XML streams, channel encryption, authentication, error handling, and communication primitives for messaging, network availability ("presence"), and request-response interactions.  This document obsoletes RFC 3920. [STANDARDS-TRACK]</t></abstract></front>
+<seriesInfo name='RFC' value='6120' />
+<format type='TXT' octets='451942' target='http://www.rfc-editor.org/rfc/rfc6120.txt' />
+</reference>
+
+<reference anchor="UNICODE" target="http://www.unicode.org/versions/Unicode6.2.0/">
+  <front>
+    <title>The Unicode Standard, Version 6.2</title>
+    <author>
+      <organization>The Unicode Consortium</organization>
+    </author>
+    <date year="2012" />
+  </front>
+</reference>
+
+    </references>
+
+    <references title="Informative References">
+
+<reference anchor='RFC20'>
+<front>
+<title>ASCII format for network interchange</title>
+<author initials='V.' surname='Cerf' fullname='Vint Cerf'>
+<organization>University California Los Angeles (UCLA)</organization></author>
+<date year='1969' day='16' month='October' />
+<abstract>
+<t>For concreteness, we suggest the use of standard 7-bit ASCII embedded in an 8 bit byte whose high order bit is always 0.</t></abstract></front>
+<seriesInfo name='RFC' value='20' />
+<format type='TXT' octets='18504' target='http://www.rfc-editor.org/rfc/rfc20.txt' />
+</reference>
+
 <reference anchor='RFC5536'>
 <front>
 <title>Netnews Article Format</title>
@@ -338,16 +349,6 @@ specifications of each URI scheme.
 <t>DomainKeys Identified Mail (DKIM) permits a person, role, or organization that owns the signing domain to claim some responsibility for a message by associating the domain with the message. This can be an author's organization, an operational relay, or one of their agents. DKIM separates the question of the identity of the Signer of the message from the purported author of the message. Assertion of responsibility is validated through a cryptographic signature and by querying the Signer's domain directly to retrieve the appropriate public key. Message transit from author to recipient is through relays that typically make no substantive change to the message content and thus preserve the DKIM signature.&lt;/t>&lt;t> This memo obsoletes RFC 4871 and RFC 5672. [STANDARDS-TRACK]</t></abstract></front>
 <seriesInfo name='RFC' value='6376' />
 <format type='TXT' octets='176999' target='http://www.rfc-editor.org/rfc/rfc6376.txt' />
-</reference>
-
-<reference anchor="UNICODE" target="http://www.unicode.org/versions/Unicode6.2.0/">
-  <front>
-    <title>The Unicode Standard, Version 6.2</title>
-    <author>
-      <organization>The Unicode Consortium</organization>
-    </author>
-    <date year="2012" />
-  </front>
 </reference>
 
     </references>
