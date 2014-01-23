@@ -10,24 +10,16 @@
 <?rfc toc="yes"?>
 <?rfc tocdepth="4"?>
 
-<rfc category="info" docName="draft-saintandre-jabberid-10" ipr="trust200902">
+<rfc category="info" docName="draft-saintandre-jabberid-12" ipr="trust200902">
 
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 
   <front>
     <title abbrev="Jabber-ID">The Jabber-ID Header Field</title>
     <author initials="P." surname="Saint-Andre" fullname="Peter Saint-Andre">
-      <organization>Cisco Systems, Inc.</organization>
+      <organization/>
       <address>
-        <postal>
-          <street>1899 Wynkoop Street, Suite 600</street>
-          <city>Denver</city>
-          <region>CO</region>
-          <code>80202</code>
-          <country>USA</country>
-        </postal>
-        <phone>+1-303-308-3282</phone>
-        <email>psaintan@cisco.com</email>
+        <email>ietf@stpeter.im</email>
       </address>
     </author>
     <date/>
@@ -101,7 +93,7 @@
           <t hangText='Applicable protocol:'>mail, netnews</t>
           <t hangText='Status:'>provisional</t>
           <t hangText='Author/Change contoller'>Peter Saint-Andre <eref target='mailto:stpeter@jabber.org'/></t>
-          <t hangText='Specification document:'>RFC &rfc.number;</t>
+          <t hangText='Specification document:'>RFC XXXX</t>
           <t hangText='Related information:'>See RFC 6120</t>
         </list>
       </t>
@@ -281,13 +273,13 @@ other RFCs.</t></abstract></front>
 <format type='TXT' octets='451942' target='http://www.rfc-editor.org/rfc/rfc6120.txt' />
 </reference>
 
-<reference anchor="UNICODE" target="http://www.unicode.org/versions/Unicode6.2.0/">
+<reference anchor="UNICODE" target="http://www.unicode.org/versions/Unicode6.3.0/">
   <front>
-    <title>The Unicode Standard, Version 6.2</title>
+    <title>The Unicode Standard, Version 6.3</title>
     <author>
       <organization>The Unicode Consortium</organization>
     </author>
-    <date year="2012" />
+    <date year="2013" />
   </front>
 </reference>
 
