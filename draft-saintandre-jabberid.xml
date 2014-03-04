@@ -49,7 +49,7 @@
     <section title="Usage" anchor="usage">
 
       <section title="Inclusion" anchor="inclusion">
-        <t>The Jabber-ID header field is associated with the author of the message; see <xref target='RFC5322'/>.  If the "From:" header field of an email message contains more than one mailbox, it is best not to add the Jabber-ID header field to the message.  Please include only one instance of the Jabber-ID header field in a given message.</t>
+        <t>The Jabber-ID header field is associated with the author of the message; see <xref target='RFC5322'/>.  If the "From:" header field of an email message contains more than one mailbox, it is best not to add the Jabber-ID header field to the message.  To reduce the possibility of confusion, it is best to include only one instance of the Jabber-ID header field in a given message.</t>
       </section>
 
       <section title="Generation" anchor="generation">
@@ -103,7 +103,7 @@
 
     <section title="Security and Privacy Considerations" anchor="security">
       <t>Message headers are an existing standard and are designed to easily accommodate new types.  Although the Jabber-ID header field could be forged, this problem is inherent in Internet email and netnews; however, because a forged Jabber-ID header field might break automated processing, applications are discouraged from depending on the Jabber-ID header field to indicate the authenticity of an email or netnews message, or the identity of its author or sender.  Including the Jabber-ID header field among the signer header fields in DomainKeys Identified Mail (DKIM) can help to mitigate against forging of the header (see <xref target='RFC6376'/>).</t>
-      <t>Advertising XMPP addresses in email or netnews headers might make it easier for malicious users to harvest XMPP addresses and therefore to send unsolicited bulk communications to the users or applications represented by those addresses.  Providing such a binding between an email address and a Jabber ID can also increase the possibility of connecting different kinds of communications traffic for purposes of surveillance and other breaches of privacy.  Care ought to be taken in balancing the benefits of open information exchange against the potential costs of security and privacy weaknesses.  An email or netnews user agent that is capable of including the Jabber-ID header field in outgoing email or netnews messages needs to provide an option for its user to disable inclusion of the Jabber-ID header field generally, on a per-recipient basis, and on a per-message basis.</t>
+      <t>Advertising XMPP addresses in email or netnews headers might make it easier for malicious users to harvest XMPP addresses and therefore to send unsolicited bulk communications to the users or applications represented by those addresses.  Providing such a binding between an email address and a Jabber ID can also increase the possibility of drawing a connection between different kinds of communications traffic for purposes of surveillance and other breaches of privacy.  Care ought to be taken in balancing the benefits of open information exchange against the potential costs of security and privacy weaknesses.  An email or netnews user agent that is capable of including the Jabber-ID header field in outgoing email or netnews messages needs to provide an option for its user to disable inclusion of the Jabber-ID header field generally, on a per-recipient basis, and on a per-message basis.</t>
       <t>The security and privacy considerations discussed in <xref target='RFC3986'/>, <xref target='RFC3987'/>, <xref target='RFC5122'/>, <xref target='RFC6120'/>, and <xref target='RFC6121'/> also apply to the Jabber-ID message header.</t>
     </section>
 
@@ -344,6 +344,10 @@ other RFCs.</t></abstract></front>
 </reference>
 
     </references>
+
+    <section title="Acknowledgements" anchor="acks">
+      <t>Thanks to Dave Cridland, Stephen Farrell, Russ Housley, and Alexey Melnikov for their feedback.</t>
+    </section>
 
   </back>
 
